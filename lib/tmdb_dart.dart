@@ -25,5 +25,6 @@ export 'src/models/gender.dart';
 export 'src/models/keyword.dart';
 export 'src/models/sort-by.dart';
 export 'src/models/video.dart';
+export 'src/models/movie_storage_type.dart';
 
 export 'src/services/tmdb-service.dart';
