@@ -1,3 +1,5 @@
+import 'package:tmdb_dart/src/models/movie_storage_type.dart';
+
 import '../settings/asset-resolver.dart';
 import 'alternative-title.dart';
 import 'collection.dart';
@@ -40,60 +42,64 @@ class Movie extends MovieBase {
   // The key represents a country code (more details there: https://developers.themoviedb.org/3/movies/get-movie-watch-providers)
   final Map<String, WatchProviders> watchProviders;
 
-  Movie(
-      {required int id,
-      required String originalLanguage,
-      String? backdropPath,
-      String? posterPath,
-      String? overview,
-      num? popularity,
-      int? voteCount,
-      num? voteAverage,
-      bool? adult,
-      Date? releaseDate,
-      String? originalTitle,
-      String? title,
-      List<int> genreIds = const [],
-      bool video = false,
-      this.belongsToCollection,
-      int? budget,
-      this.genres = const [],
-      this.homepage,
-      this.imdbId,
-      this.productionCompanies = const [],
-      this.productionCountries = const [],
-      int? revenue,
-      int? runtime,
-      this.spokenLanguages = const [],
-      this.status,
-      this.tagline,
-      this.images,
-      this.alternativeTitles = const [],
-      this.credits,
-      this.externalIds,
-      this.keywords = const [],
-      this.videos = const [],
-      this.recommendations = const [],
-      this.similar = const [],
-      this.watchProviders = const {}})
-      : revenue = revenue ?? 0,
+  final MovieStorageType movieStorageType;
+
+  Movie({
+    required int id,
+    required String originalLanguage,
+    String? backdropPath,
+    String? posterPath,
+    String? overview,
+    num? popularity,
+    int? voteCount,
+    num? voteAverage,
+    bool? adult,
+    Date? releaseDate,
+    String? originalTitle,
+    String? title,
+    List<int> genreIds = const [],
+    bool video = false,
+    this.belongsToCollection,
+    int? budget,
+    this.genres = const [],
+    this.homepage,
+    this.imdbId,
+    this.productionCompanies = const [],
+    this.productionCountries = const [],
+    int? revenue,
+    int? runtime,
+    this.spokenLanguages = const [],
+    this.status,
+    this.tagline,
+    this.images,
+    this.alternativeTitles = const [],
+    this.credits,
+    this.externalIds,
+    this.keywords = const [],
+    this.videos = const [],
+    this.recommendations = const [],
+    this.similar = const [],
+    this.watchProviders = const {},
+    this.movieStorageType = MovieStorageType.unknown,
+  })  : revenue = revenue ?? 0,
         runtime = runtime ?? 0,
         budget = budget ?? 0,
         super(
-            id: id,
-            originalLanguage: originalLanguage,
-            backdropPath: backdropPath,
-            posterPath: posterPath,
-            overview: overview,
-            popularity: popularity,
-            voteCount: voteCount,
-            voteAverage: voteAverage,
-            adult: adult,
-            releaseDate: releaseDate,
-            originalTitle: originalTitle,
-            title: title,
-            video: video,
-            genreIds: genreIds);
+          id: id,
+          originalLanguage: originalLanguage,
+          backdropPath: backdropPath,
+          posterPath: posterPath,
+          overview: overview,
+          popularity: popularity,
+          voteCount: voteCount,
+          voteAverage: voteAverage,
+          adult: adult,
+          releaseDate: releaseDate,
+          originalTitle: originalTitle,
+          title: title,
+          video: video,
+          genreIds: genreIds,
+        );
 
   // TODO
   // ReleaseDates
@@ -163,6 +169,9 @@ class Movie extends MovieBase {
         watchProviders: map.containsKey("watch/providers")
             ? WatchProviders.mapFromJson(map["watch/providers"]["results"])
             : {},
+        movieStorageType: map.containsKey("movieStorageType")
+            ? getMovieStorageTypeFromIndex(map["movieStorageType"])
+            : MovieStorageType.unknown,
       );
 
   Map<String, dynamic> toMap() {
@@ -198,6 +207,7 @@ class Movie extends MovieBase {
           );
         },
       ),
+      'movieStorageType': movieStorageType.index
     };
 
     _toMap.addAll(super.toMap());
