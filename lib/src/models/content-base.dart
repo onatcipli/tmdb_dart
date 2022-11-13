@@ -62,14 +62,14 @@ class TvBase extends _CommonBase {
           .map((x) => TvBase.fromJson(x, assetResolver))
           .toList(growable: false);
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     final _toMap = {
       'first_air_date': this.firstAirDate,
       'name': this.name,
       'original_name': this.originalName,
       'origin_country': this.originCountry,
     };
-    _toMap.addAll(super.toMap());
+    _toMap.addAll(super.toJson());
     return _toMap;
   }
 }
@@ -139,7 +139,7 @@ class MovieBase extends _CommonBase {
           .map((x) => MovieBase.fromJson(x, assetResolver))
           .toList(growable: false);
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     final _toMap = {
       'adult': this.adult,
       'release_date': this.releaseDate.toString(),
@@ -147,7 +147,7 @@ class MovieBase extends _CommonBase {
       'title': this.title,
       'video': this.video,
     };
-    _toMap.addAll(super.toMap());
+    _toMap.addAll(super.toJson());
     return _toMap;
   }
 }
@@ -177,7 +177,7 @@ abstract class _CommonBase {
         voteAverage = voteAverage ?? 0,
         popularity = popularity ?? 0;
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': this.id,
       'original_language': this.originalLanguage,

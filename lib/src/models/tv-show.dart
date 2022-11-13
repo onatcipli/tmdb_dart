@@ -171,7 +171,7 @@ class TvShow extends TvBase {
             : {},
       );
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     final _toMap = {
       'created_by': this.createdBy.map((e) => e.toMap()).toList(),
       'episodeRunTime': this.episodeRunTime,
@@ -198,13 +198,13 @@ class TvShow extends TvBase {
       'externalIds': this.externalIds?.toMap(),
       'keywords': this.keywords.map((e) => e.toMap()).toList(),
       'videos': this.videos.map((e) => e.toMap()).toList(),
-      'recommendations': this.recommendations.map((e) => e.toMap()).toList(),
-      'similar': this.similar.map((e) => e.toMap()).toList(),
+      'recommendations': this.recommendations.map((e) => e.toJson()).toList(),
+      'similar': this.similar.map((e) => e.toJson()).toList(),
       'watchProviders': this.watchProviders.map((key, value) {
         return MapEntry(key, value.toMap());
       }),
     };
-    _toMap.addAll(super.toMap());
+    _toMap.addAll(super.toJson());
 
     return _toMap;
   }

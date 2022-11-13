@@ -174,7 +174,7 @@ class Movie extends MovieBase {
             : MovieStorageType.unknown,
       );
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     final _toMap = {
       'belongs_to_collection': this.belongsToCollection?.toMap(),
       'budget': this.budget,
@@ -197,8 +197,8 @@ class Movie extends MovieBase {
       'external_ids': this.externalIds?.toMap(),
       'keywords': this.keywords.map((e) => e.toMap()).toList(),
       'videos': this.videos.map((e) => e.toMap()).toList(),
-      'recommendations': this.recommendations.map((e) => e.toMap()).toList(),
-      'similar': this.similar.map((e) => e.toMap()).toList(),
+      'recommendations': this.recommendations.map((e) => e.toJson()).toList(),
+      'similar': this.similar.map((e) => e.toJson()).toList(),
       'watch_providers': this.watchProviders.map(
         (key, value) {
           return MapEntry(
@@ -210,7 +210,7 @@ class Movie extends MovieBase {
       'movieStorageType': movieStorageType.index
     };
 
-    _toMap.addAll(super.toMap());
+    _toMap.addAll(super.toJson());
 
     return _toMap;
   }
