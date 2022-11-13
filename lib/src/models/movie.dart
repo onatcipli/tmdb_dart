@@ -42,7 +42,7 @@ class Movie extends MovieBase {
   // The key represents a country code (more details there: https://developers.themoviedb.org/3/movies/get-movie-watch-providers)
   final Map<String, WatchProviders> watchProviders;
 
-  final MovieStorageType movieStorageType;
+  MovieStorageType movieStorageType;
 
   Movie({
     required int id,
@@ -207,82 +207,12 @@ class Movie extends MovieBase {
           );
         },
       ),
-      'movieStorageType': movieStorageType.index,
-
-      'adult': this.adult,
-      'release_date': this.releaseDate.toString(),
-      'original_title': this.originalTitle,
-      'title': this.title,
-      'video': this.video,
-
-
-      'id': this.id,
-      'original_language': this.originalLanguage,
-      'backdrop_path': AssetResolver.getPathFromUrl(this.backdropPath),
-      'poster_path': AssetResolver.getPathFromUrl(this.posterPath),
-      'overview': this.overview,
-      'genre_ids': this.genreIds,
-      'popularity': this.popularity,
-      'vote_count': this.voteCount,
-      'vote_average': this.voteAverage,
+      'movieStorageType': movieStorageType.index
     };
 
-    // _toMap.addAll(super.toJson());
+    _toMap.addAll(super.toJson());
 
     return _toMap;
   }
 
-  Movie copyWith({
-    Collection? belongsToCollection,
-    int? budget,
-    List<Genre>? genres,
-    String? homepage,
-    String? imdbId,
-    List<Company>? productionCompanies,
-    List<Country>? productionCountries,
-    int? revenue,
-    int? runtime,
-    List<Country>? spokenLanguages,
-    String? status,
-    String? tagline,
-    ImageCollection? images,
-    List<AlternativeTitle>? alternativeTitles,
-    Credits? credits,
-    ExternalInfo? externalIds,
-    List<Keyword>? keywords,
-    List<Video>? videos,
-    List<MovieBase>? recommendations,
-    List<MovieBase>? similar,
-    Map<String, WatchProviders>? watchProviders,
-    MovieStorageType? movieStorageType,
-    int? id,
-    String? originalLanguage,
-  }) {
-    return Movie(
-      belongsToCollection: belongsToCollection ?? this.belongsToCollection,
-      budget: budget ?? this.budget,
-      genres: genres ?? this.genres,
-      homepage: homepage ?? this.homepage,
-      imdbId: imdbId ?? this.imdbId,
-      productionCompanies: productionCompanies ?? this.productionCompanies,
-      productionCountries: productionCountries ?? this.productionCountries,
-      revenue: revenue ?? this.revenue,
-      runtime: runtime ?? this.runtime,
-      spokenLanguages: spokenLanguages ?? this.spokenLanguages,
-      status: status ?? this.status,
-      tagline: tagline ?? this.tagline,
-      images: images ?? this.images,
-      alternativeTitles: alternativeTitles ?? this.alternativeTitles,
-      credits: credits ?? this.credits,
-      externalIds: externalIds ?? this.externalIds,
-      keywords: keywords ?? this.keywords,
-      videos: videos ?? this.videos,
-      recommendations: recommendations ?? this.recommendations,
-      similar: similar ?? this.similar,
-      watchProviders: watchProviders ?? this.watchProviders,
-      movieStorageType: movieStorageType ?? this.movieStorageType,
-      id: id ?? this.id,
-      originalLanguage: originalLanguage ?? this.originalLanguage,
-    );
-  }
 }
