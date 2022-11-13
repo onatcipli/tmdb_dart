@@ -191,22 +191,33 @@ class Movie extends MovieBase {
       'status': this.status,
       'tagline': this.tagline,
       'images': this.images?.toMap(),
-      'alternative_titles':
-          this.alternativeTitles.map((e) => e.toMap()).toList(),
+      'alternative_titles': {
+        'titles': this.alternativeTitles.map((e) => e.toMap()).toList(),
+      },
       'credits': this.credits?.toMap(),
       'external_ids': this.externalIds?.toMap(),
-      'keywords': this.keywords.map((e) => e.toMap()).toList(),
-      'videos': this.videos.map((e) => e.toMap()).toList(),
-      'recommendations': this.recommendations.map((e) => e.toJson()).toList(),
-      'similar': this.similar.map((e) => e.toJson()).toList(),
-      'watch_providers': this.watchProviders.map(
-        (key, value) {
-          return MapEntry(
-            key,
-            value.toMap(),
-          );
-        },
-      ),
+      'keywords': {
+        'keywords': this.keywords.map((e) => e.toMap()).toList(),
+      },
+      'videos': {
+        'results': this.videos.map((e) => e.toMap()).toList(),
+      },
+      'recommendations': {
+        'results': this.recommendations.map((e) => e.toJson()).toList(),
+      },
+      'similar': {
+        'results': this.similar.map((e) => e.toJson()).toList(),
+      },
+      'watch/providers': {
+        'results': this.watchProviders.map(
+          (key, value) {
+            return MapEntry(
+              key,
+              value.toMap(),
+            );
+          },
+        ),
+      },
       'movieStorageType': movieStorageType.index
     };
 
@@ -214,5 +225,4 @@ class Movie extends MovieBase {
 
     return _toMap;
   }
-
 }
