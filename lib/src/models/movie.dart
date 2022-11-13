@@ -207,10 +207,27 @@ class Movie extends MovieBase {
           );
         },
       ),
-      'movieStorageType': movieStorageType.index
+      'movieStorageType': movieStorageType.index,
+
+      'adult': this.adult,
+      'release_date': this.releaseDate.toString(),
+      'original_title': this.originalTitle,
+      'title': this.title,
+      'video': this.video,
+
+
+      'id': this.id,
+      'original_language': this.originalLanguage,
+      'backdrop_path': AssetResolver.getPathFromUrl(this.backdropPath),
+      'poster_path': AssetResolver.getPathFromUrl(this.posterPath),
+      'overview': this.overview,
+      'genre_ids': this.genreIds,
+      'popularity': this.popularity,
+      'vote_count': this.voteCount,
+      'vote_average': this.voteAverage,
     };
 
-    _toMap.addAll(super.toJson());
+    // _toMap.addAll(super.toJson());
 
     return _toMap;
   }
